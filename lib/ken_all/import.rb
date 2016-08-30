@@ -92,7 +92,9 @@ EOS
             end
           end
           KenAll::PostalCode.delete_all
-          KenAll::PostalCode.import(header, list)
+          list.each_slice(1000) do |values|
+            KenAll::PostalCode.import(header, values)
+          end
         end
       end
     end
